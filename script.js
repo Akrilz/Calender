@@ -3,7 +3,7 @@
  * 1. Tạo Apps Script từ Google Sheets và triển khai dưới dạng Web app.
  * 2. Dán URL kết thúc bằng /exec vào APPS_SCRIPT_URL bên dưới.
  */
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXBIYGORgHhdzllqh6f0v7GUHC5nPLycBLSHi5iI7eGhraLh1gnClcw-Ek-_RTam9LKA/exec";
+const APPS_SCRIPT_URL = "DAN_URL_WEB_APP_CUA_BAN_VAO_DAY";
 const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // Tự đồng bộ lại sau mỗi 5 phút.
 const STORAGE_KEY = "selectedScheduleClass";
 
@@ -71,10 +71,34 @@ function createLessonCard(lesson) {
   subject.textContent = lesson.subject || "Chưa có tên môn";
   card.appendChild(subject);
 
-  if (lesson.teacher) {
-    const teacher = document.createElement("span");
-    teacher.textContent = lesson.teacher;
-    card.appendChild(teacher);
+  if (lesson.linkText) {
+    const linkUrl = String(lesson.linkUrl || "").trim();
+    let safeUrl = false;
+
+    // Chỉ cho phép liên kết HTTP/HTTPS; không cho phép javascript: hoặc data:.
+    try {
+      const parsedUrl = new URL(linkUrl);
+      safeUrl = parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:";
+    } catch (_error) {
+      safeUrl = false;
+    }
+
+    if (safeUrl) {
+      const link = document.createElement("a");
+      link.className = "lesson-link";
+      link.textContent = lesson.linkText;
+      link.href = linkUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.setAttribute("aria-label", `${lesson.linkText} – mở liên kết trong tab mới`);
+      card.appendChild(link);
+    } else {
+      // Vẫn hiển thị nội dung nếu chưa nhập URL, nhưng không biến nó thành liên kết.
+      const label = document.createElement("span");
+      label.className = "lesson-link is-disabled";
+      label.textContent = lesson.linkText;
+      card.appendChild(label);
+    }
   }
 
   return card;
