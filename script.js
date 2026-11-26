@@ -3,7 +3,7 @@
  * 1. Tạo Apps Script từ Google Sheets và triển khai dưới dạng Web app.
  * 2. Dán URL kết thúc bằng /exec vào APPS_SCRIPT_URL bên dưới.
  */
-const APPS_SCRIPT_URL = "DAN_URL_WEB_APP_CUA_BAN_VAO_DAY";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXBIYGORgHhdzllqh6f0v7GUHC5nPLycBLSHi5iI7eGhraLh1gnClcw-Ek-_RTam9LKA/exec";
 const REFRESH_INTERVAL_MS = 5 * 60 * 1000; // Tự đồng bộ lại sau mỗi 5 phút.
 const STORAGE_KEY = "selectedScheduleClass";
 
