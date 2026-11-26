@@ -4,18 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Thời khóa biểu lớp BCA01 - 2K9">
-  <title>Thời khóa biểu - BCA01</title>
+  <meta name="description" content="Thời khóa biểu các lớp">
+  <title>Thời khóa biểu</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="page-container">
     <section class="schedule-card" aria-labelledby="schedule-title">
       <div class="card-heading">
-        <h1 id="schedule-title">Thông tin Lớp BCA01 - 2K9</h1>
-        <div class="sync-status" aria-label="Trạng thái dữ liệu">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span>Dữ liệu thời khóa biểu</span>
+        <h1 id="schedule-title">Thời khóa biểu</h1>
+        <div class="heading-actions">
+          <label class="class-picker" for="class-select">
+            <span class="sr-only">Chọn lớp</span>
+            <select id="class-select" hidden disabled>
+              <option>Đang tải lớp...</option>
+            </select>
+          </label>
+          <div class="sync-status" id="sync-status" role="status" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="sync-message">Đang kết nối Google Sheets...</span>
+          </div>
+          <button class="refresh-button" id="refresh-button" type="button" title="Tải lại dữ liệu">
+            ↻ Cập nhật
+          </button>
         </div>
       </div>
 
@@ -33,48 +44,14 @@
               <th scope="col" data-day="0">Chủ nhật<span class="today-label"></span></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="schedule-body">
             <tr>
-              <th class="period-cell" scope="row">20h00 - 21h30</th>
-              <td data-day="1"><span class="empty">—</span></td>
-              <td data-day="2">
-                <div class="lesson"><strong>Vật Lý</strong><span>Thầy Tuyến</span></div>
-              </td>
-              <td data-day="3">
-                <div class="lesson"><strong>Lịch Sử</strong><span>Thầy Quang</span></div>
-              </td>
-              <td data-day="4"><span class="empty">—</span></td>
-              <td data-day="5">
-                <div class="lesson"><strong>Sinh Học (Bù)</strong><span>Thầy Kiên</span></div>
-              </td>
-              <td data-day="6">
-                <div class="lesson"><strong>Hóa Học</strong><span>Thầy Bình</span></div>
-              </td>
-              <td data-day="0">
-                <div class="lesson"><strong>Toán Đại (Bù)</strong><span>Cô Trang</span></div>
-              </td>
-            </tr>
-            <tr>
-              <th class="period-cell" scope="row">21h35 - 23h05</th>
-              <td data-day="1"><span class="empty">—</span></td>
-              <td data-day="2"><span class="empty">—</span></td>
-              <td data-day="3">
-                <div class="lesson"><strong>Địa Lý</strong><span>Cô Nhật Anh</span></div>
-              </td>
-              <td data-day="4">
-                <div class="lesson"><strong>Toán Hình</strong><span>Cô Trinh</span></div>
-              </td>
-              <td data-day="5">
-                <div class="lesson"><strong>Toán Đại</strong><span>Cô Trang</span></div>
-              </td>
-              <td data-day="6">
-                <div class="lesson"><strong>Sinh Học</strong><span>Thầy Kiên</span></div>
-              </td>
-              <td data-day="0"><span class="empty">—</span></td>
+              <td class="table-message" colspan="8">Đang tải thời khóa biểu...</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <p class="data-note" id="data-note">Dữ liệu được tải từ Google Sheets.</p>
     </section>
   </main>
 
