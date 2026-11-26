@@ -1,0 +1,207 @@
+:root {
+  --navy: #07336d;
+  --blue: #1760b8;
+  --pale-blue: #e8f0ff;
+  --pale-blue-header: #f2f6ff;
+  --border: #dce9e1;
+  --muted: #667b8b;
+  --today: #f49a45;
+  --today-bg: #fff6ed;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  padding: 10px 17px 28px;
+  background: #ffffff;
+  color: var(--navy);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page-container {
+  width: min(100%, 1350px);
+  margin: 0 auto;
+}
+
+.schedule-card {
+  padding: 31px 32px 19px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: 0 2px 9px rgba(13, 55, 83, 0.045);
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.card-heading h1 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(20px, 2vw, 25px);
+  font-weight: 750;
+  letter-spacing: -0.55px;
+}
+
+.sync-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: #647888;
+  font-size: 15px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #3475f5;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  scrollbar-width: thin;
+}
+
+.schedule-table {
+  width: 100%;
+  min-width: 850px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: center;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.schedule-table tr > :last-child {
+  border-right: 0;
+}
+
+.schedule-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.schedule-table thead th {
+  height: 61px;
+  padding: 10px 8px;
+  background: var(--pale-blue-header);
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.schedule-table thead .period-heading {
+  width: 195px;
+  padding-left: 13px;
+  background: #fbfdfc;
+  color: var(--blue);
+  text-align: left;
+}
+
+.schedule-table tbody th,
+.schedule-table tbody td {
+  height: 84px;
+  padding: 9px 10px;
+  vertical-align: middle;
+}
+
+.schedule-table tbody .period-cell {
+  width: 195px;
+  padding-left: 13px;
+  background: #fbfdfc;
+  color: var(--blue);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.lesson {
+  display: flex;
+  min-height: 58px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 5px;
+  border-radius: 11px;
+  background: var(--pale-blue);
+  line-height: 1.25;
+}
+
+.lesson strong {
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.lesson span {
+  color: #657b8c;
+  font-size: 14px;
+}
+
+.empty {
+  color: #b9c9c8;
+  font-size: 19px;
+}
+
+/* JavaScript adds .today to the current weekday's header and cells. */
+.schedule-table [data-day].today {
+  background: var(--today-bg);
+}
+
+.schedule-table thead [data-day].today {
+  background: var(--today);
+  color: #ffffff;
+}
+
+.today-label {
+  display: none;
+  margin-top: 3px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.schedule-table thead [data-day].today .today-label {
+  display: block;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 10px;
+  }
+
+  .schedule-card {
+    padding: 20px 14px 15px;
+    border-radius: 18px;
+  }
+
+  .card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 16px;
+  }
+
+  .sync-status {
+    font-size: 13px;
+  }
+}
