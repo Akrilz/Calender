@@ -63,6 +63,31 @@ function markToday() {
   if (todayLabel) todayLabel.textContent = "Hôm nay";
 }
 
+// Chuyển thời gian thành số phút kể từ 00:00
+function getPeriodStartMinutes(period) {
+    const text = String(period)
+        .normalize("NFKC")
+        .replace(/\u00A0/g, " ")
+        .trim();
+
+    const match = text.match(/(\d{1,2})\s*(?:h|:)\s*(\d{2})/i);
+
+    if (!match) {
+        console.warn("Không nhận diện được giờ học:", period);
+        return Number.MAX_SAFE_INTEGER;
+    }
+
+    const hours = Number(match[1]);
+    const minutes = Number(match[2]);
+
+    if (hours > 23 || minutes > 59) {
+        console.warn("Thời gian không hợp lệ:", period);
+        return Number.MAX_SAFE_INTEGER;
+    }
+
+    return hours * 60 + minutes;
+}
+
 function createLessonCard(lesson) {
   const card = document.createElement("div");
   card.className = "lesson";
@@ -114,7 +139,18 @@ function renderSelectedClass(classCode) {
   titleElement.textContent = `Thông tin ${selectedClass.title || selectedClass.code}`;
   document.title = `Thời khóa biểu - ${selectedClass.code}`;
 
-  const periods = [...new Set(selectedClass.lessons.map((lesson) => lesson.period).filter(Boolean))];
+  const periods = [
+    ...new Set(
+        selectedClass.lessons
+            .map(lesson => lesson.period)
+            .filter(Boolean)
+    )
+].sort((a, b) => {
+    const timeA = getPeriodStartMinutes(a);
+    const timeB = getPeriodStartMinutes(b);
+
+    return timeA - timeB;
+});
   if (periods.length === 0) {
     showTableMessage("Lớp này hiện chưa có lịch học.");
     return;
