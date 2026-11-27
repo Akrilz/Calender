@@ -151,6 +151,7 @@ function renderSelectedClass(classCode) {
 
     return timeA - timeB;
 });
+  console.log("SCHEDULE SORT FIX - VERSION 2");
   if (periods.length === 0) {
     showTableMessage("Lớp này hiện chưa có lịch học.");
     return;
